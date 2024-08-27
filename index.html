@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Counter</title>
+    <style>
+        body{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: skyblue;
+            font-family: Arial,sans-serif;
+        }
+        .container{
+            text-align:center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: grey;
+        }
+        #counter{
+            margin-top: 10px;
+        }
+        .warning{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <label for="message">Your Message:</label>
+        <textarea id="message" rows="4" cols="50" maxlength="200"></textarea>
+        <div id="counter">0/200 characters</div>
+        <div id="warning" class="warning" style="display: none;">Character limit exceeded!</div>
+    </div>
+
+    <script>
+        var textarea = document.getElementById('message');
+        var counter = document.getElementById('counter');
+        var warning = document.getElementById('warning');
+        var maxLength = 200;
+
+        textarea.addEventListener('input', () => {
+            var currentLength = textarea.value.length;
+            var remaining = maxLength - currentLength;
+
+            if (currentLength > maxLength) {
+                textarea.value = textarea.value.substring(0, maxLength);
+                warning.style.display = 'block';
+            } else {
+                warning.style.display = 'none';
+            }
+
+            counter.textContent = `${currentLength}/${maxLength} characters`;
+        });
+    </script>
+</body>
+</html>
